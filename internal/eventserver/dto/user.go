@@ -48,10 +48,10 @@ func CreateUser(user User) User {
 	return user
 }
 
-func DeleteUser(user_name string) User {
+func DeleteUser(user_name string) bool {
 	var user User
-	database.DB_CONNECTOR.Where("username = ?", user_name).Delete(&user)
-	return user
+	result := database.DB_CONNECTOR.Where("username = ?", user_name).Delete(&user)
+	return result.RowsAffected > 0
 }
 
 func UpdateUser(user User) User {

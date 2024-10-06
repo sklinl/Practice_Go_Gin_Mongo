@@ -48,9 +48,9 @@ func DeleteUser(c *gin.Context) {
 	// userList = append(userList[:userIdx], userList[userIdx+1:]...)
 
 	user_name := c.Params.ByName("username")
-	user := dto.DeleteUser(user_name)
+	ok := dto.DeleteUser(user_name)
 
-	if user.Username == "" {
+	if !ok {
 		c.JSON(400, gin.H{"error": "user not found"})
 		return
 	}
